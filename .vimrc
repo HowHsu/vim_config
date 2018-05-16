@@ -34,3 +34,4 @@ noremap <F2> :TlistToggle<CR>
 let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap <F3> :WMToggle<CR>
 
+set fdm=indent
