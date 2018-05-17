@@ -35,3 +35,6 @@ let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap <F3> :WMToggle<CR>
 
 set fdm=indent
+
+"设置折叠后的颜色
+:hi Folded guibg=black guifg=grey40 ctermfg=grey ctermbg=green
