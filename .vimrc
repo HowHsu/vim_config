@@ -9,7 +9,7 @@ set shiftwidth=4
 imap { {}<ESC>i<CR><ESC>V<O
 
 "取消C-b的向上翻页功能，防止与tmux的C-b冲突
-nmap C-b <ESC>
+"nunmap ^b
 
 
 au BufRead,BufNewFile *.go setf go "set /usr/share/vim/vim74/syntax/go.vim for *.go files
@@ -38,3 +38,12 @@ set fdm=indent
 
 "设置折叠后的颜色
 :hi Folded guibg=black guifg=grey40 ctermfg=grey ctermbg=green
+
+"内容改变后自动重载
+set autoread
+
+"显示当前mode
+set showmode
+
+"显示匹配的括号
+set showmatch
