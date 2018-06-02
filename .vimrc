@@ -8,10 +8,6 @@ set shiftwidth=4
 "括号补全
 imap { {}<ESC>i<CR><ESC>V<O
 
-"取消C-b的向上翻页功能，防止与tmux的C-b冲突
-"nunmap ^b
-
-
 au BufRead,BufNewFile *.go setf go "set /usr/share/vim/vim74/syntax/go.vim for *.go files
 syntax enable
 filetype plugin on
@@ -47,3 +43,17 @@ set showmode
 
 "显示匹配的括号
 set showmatch
+
+"移动行
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+"取消C-b的向上翻页功能，防止与tmux的C-b冲突
+nmap bb <C-b>  
+vmap bb <C-b>
+nmap ff <C-f>  
+vmap ff <C-f>
