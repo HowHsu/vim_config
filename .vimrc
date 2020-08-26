@@ -1,72 +1,41 @@
-set nu
+" first install vim-plug to ~/.vim/autoload/
+call plug#begin('~/.vim/plugged')
 
-"换行自动缩进
-set smartindent
-set ts=4
-set shiftwidth=4
+"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+	" the taskbar
+	Plug 'itchyny/lightline.vim'
+	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+	Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+	Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+	Plug 'vivien/vim-linux-coding-style'
+	" LeaderF is for fuzzy search, ensure vim version > 7.4
+	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+call plug#end()
 
-"括号补全
-imap { {}<ESC>i<CR><ESC>V<O
+" general settings
+	set ts=4
+	set nu
+	set noshowmode
+	"
+	set backspace=2
 
-au BufRead,BufNewFile *.go setf go "set /usr/share/vim/vim74/syntax/go.vim for *.go files
-syntax enable
-filetype plugin on
+" LeaderF settings
+	let g:Lf_WindowPosition = 'popup'
+	let g:Lf_PreviewInPopup = 1
 
-"vim will search tags recursively from the current dir back to the top dir
-set autochdir
-set tags=tags;
+" vim-linux-coding-style
+	" options will be applied only if "/linux/" or "/kernel" is in buffer's path.
+	let g:linuxsty_patterns = [ "/linux/", "/kernel/" ]
 
-"let g:go_disable_autoinstall = 0
+" lightline settings
+	set laststatus=2
+	" remember to do: export TERM=xterm-256color in .zshrc 
+	if !has('gui_running')
+		set t_Co=256
+	endif
+	let g:lightline = {
+		\ 'colorscheme': 'PaperColor_dark',
+		\ }
 
-"taglist settings
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow = 1
-noremap <F2> :TlistToggle<CR>
-"let Tlist_Use_Right_Window =1
-"let Tlist_WinHeight = 100
-"let Tlist_WinWidth = 40
-
-"for WinManager
-let g:winManagerWindowLayout='FileExplorer|TagList'
-nmap <F3> :WMToggle<CR>
-
-set fdm=indent
-
-"设置折叠后的颜色
-:hi Folded guibg=black guifg=grey40 ctermfg=grey ctermbg=green
-
-"内容改变后自动重载
-set autoread
-
-"显示当前mode
-set showmode
-
-"显示匹配的括号
-set showmatch
-
-"移动行
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
-
-"取消C-b的向上翻页功能，防止与tmux的C-b冲突
-nmap bb <C-b>  
-vmap bb <C-b>
-nmap ff <C-f>  
-vmap ff <C-f>
-
-
-
-" 状态栏
-set laststatus=2      " 总是显示状态栏
-highlight StatusLine cterm=bold ctermfg=yellow ctermbg=green
-" " 获取当前路径，将$HOME转化为~
- function! CurDir()
-     let curdir = substitute(getcwd(), $HOME, "~", "g")
-         return curdir
-         endfunction
-
-set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd:\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|\ %{$USER}\ @\ %{hostname()}\}}}}
