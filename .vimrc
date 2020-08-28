@@ -149,8 +149,25 @@ let g:gutentags_cache_dir = expand('~/workspace/.cache/tags')
 " 禁用 gutentags 自动加载 gtags 数据库的行为避免多个项目数据库相互干扰,使用plus插件解决问题
 let g:gutentags_auto_add_gtags_cscope = 0
 let g:gutentags_define_advanced_commands = 1
+
+" ----------gutentags-plus configuration-----------------------------------
 " change focus to quickfix window after search (optional).
 let g:gutentags_plus_switch = 1
+
+"You can disable the default keymaps by:
+let g:gutentags_plus_nomap = 1
+
+"and define your new maps like:
+noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
+noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
+noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
 
 "----------vim-preview配置-----------------------------------------
 "P 预览 大p关闭
