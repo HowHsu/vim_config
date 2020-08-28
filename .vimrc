@@ -46,6 +46,7 @@ call plug#begin('~/.vim/plugged')
 	
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	
+
 	"""""""""""""""""" Code Format Configuration Plugins """""""""""
 	
 	" code fast alignment
@@ -54,6 +55,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-scripts/Smart-Tabs'
 	
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 	"""""""""""""""""" Code Edit Configuration Plugins """"""""""""""
 	
@@ -83,23 +85,23 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " general settings
-	set ts=4
 	set nu
 	set noshowmode
 	"
 	set backspace=2
 
-" LeaderF settings
+
+" -----------------------------LeaderF settings--------------------------
 	let g:Lf_WindowPosition = 'left'
 	"let g:Lf_PreviewInPopup = 1
 	"let g:Lf_ShortcutF = '<C-P>'
 	"let g:Lf_ShortcutB = '<C-B>'
 	noremap <leader>m :LeaderfFunction!<cr>
-" vim-linux-coding-style
+	" vim-linux-coding-style
 	" options will be applied only if "/linux/" or "/kernel" is in buffer's path.
 	let g:linuxsty_patterns = [ "/linux/", "/kernel/" ]
 
-" lightline settings
+	" lightline settings
 	set laststatus=2
 	" remember to do: export TERM=xterm-256color in .zshrc 
 	if !has('gui_running')
@@ -109,67 +111,74 @@ call plug#end()
 		\ 'colorscheme': 'PaperColor_dark',
 		\ }
 
+
 " ----------gutentags.vim configuration-----------------------------------
+
 "  gutentags will automatically generate/update tags asyncally in the background
 "  gutentags can use ctags and/or gtags to generate tags
 "  here I comment all ctags config since I just use gtags, gtags support c/c++
 "  that's good enough for me
-"yum install -y global-ctags
-set tags=./.tags;,.tags
-" with pygments, gtags can use ctags as a front end to support more languages.
-"let $GTAGSLABEL = 'pygments'
+	"yum install -y global-ctags
+	set tags=./.tags;,.tags
+	" with pygments, gtags can use ctags as a front end to support more languages.
+	"let $GTAGSLABEL = 'pygments'
 
-" this is not neccessary
-"let $GTAGSCONF = '/etc/gtags.conf'
+	" this is not neccessary
+	"let $GTAGSCONF = '/etc/gtags.conf'
 
-" gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
-let g:gutentags_project_root = ['.git','.root','.svn','.hg','.project']
+	" this is to set the mark of a project, so that gutentags know this is
+	" a project to generate tags
+	let g:gutentags_project_root = ['.git','.root','.svn','.hg','.project']
 
-" 所生成的数据文件的名称
-"let g:gutentags_ctags_tagfile = '.tags'
-" 同时开启 ctags 和 gtags 支持：
-let g:gutentags_modules = []
-	if executable('ctags')
-			let g:gutentags_modules += ['ctags']
-	endif
-	if executable('gtags-cscope') && executable('gtags')
-			let g:gutentags_modules += ['gtags_cscope']
-	endif
-" store the ctags/gtags file in ~/workspace/.cache/tags directory to avoid
-" polluting the project directory
-let g:gutentags_cache_dir = expand('~/workspace/.cache/tags')
-" configure ctags
-"let g:gutentags_ctags_extra_args = []
-"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-"let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+	" the name of the tag file
+	"let g:gutentags_ctags_tagfile = '.tags'
+	" oepn the config to support ctags and gtags at the same time
+	let g:gutentags_modules = []
+		if executable('ctags')
+				let g:gutentags_modules += ['ctags']
+		endif
+		if executable('gtags-cscope') && executable('gtags')
+				let g:gutentags_modules += ['gtags_cscope']
+		endif
+	" store the ctags/gtags file in ~/workspace/.cache/tags directory to avoid
+	" polluting the project directory
+	let g:gutentags_cache_dir = expand('~/workspace/.cache/tags')
+	" configure ctags
+	"let g:gutentags_ctags_extra_args = []
+	"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+	"let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+	"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
-" 如果使用 universal ctags 需要增加下面一行
-"let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-" 禁用 gutentags 自动加载 gtags 数据库的行为避免多个项目数据库相互干扰,使用plus插件解决问题
-let g:gutentags_auto_add_gtags_cscope = 0
-let g:gutentags_define_advanced_commands = 1
+	" add this line if using universal ctags
+	"let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+	" forbidden gutentags to load gtags database automatically to avoid
+	" multiple projects' databases mess up with each other.
+	" the gtags database loading and switching will be done by
+	" gutentags-plus automatically.
+	let g:gutentags_auto_add_gtags_cscope = 0
+	let g:gutentags_define_advanced_commands = 1
 
 " ----------gutentags-plus configuration-----------------------------------
-" change focus to quickfix window after search (optional).
-let g:gutentags_plus_switch = 1
+	" change focus to quickfix window after search (optional).
+	let g:gutentags_plus_switch = 1
 
-"You can disable the default keymaps by:
-let g:gutentags_plus_nomap = 1
+	"You can disable the default keymaps by:
+	let g:gutentags_plus_nomap = 1
 
-"and define your new maps like:
-noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
-noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
-noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
-noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
-noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
-noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
+	"and define your new maps like:
+	noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+	noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
+	noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
+	noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+	noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
+	noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+	noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+	noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+	noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
+	noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
 
-"----------vim-preview配置-----------------------------------------
-"P 预览 大p关闭
-autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
-autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+"----------vim-preview configuration-----------------------------------------
+	"P for preview, p for close
+	autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+	autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
