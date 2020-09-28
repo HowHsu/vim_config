@@ -87,10 +87,19 @@ call plug#end()
 " general settings
 	set nu
 	set noshowmode
-	"
+
 	set backspace=2
 
+	" set the fold mode
+	set fdm=indent
+	"set the color of folded code
+	:hi Folded guibg=black guifg=grey40 ctermfg=LightGrey ctermbg=DarkGrey
 
+	" wrap line when the commit message is too long
+	set wrap
+
+	" show a candidate list when press ctrl+]
+	set cscopetag
 " -----------------------------LeaderF settings--------------------------
 	let g:Lf_WindowPosition = 'left'
 	"let g:Lf_PreviewInPopup = 1
