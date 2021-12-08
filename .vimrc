@@ -100,6 +100,9 @@ call plug#end()
 
 	" show a candidate list when press ctrl+]
 	set cscopetag
+
+	set colorcolumn=81
+	:hi ColorColumn ctermbg=darkgrey guibg=darkgrey
 " -----------------------------LeaderF settings--------------------------
 	let g:Lf_WindowPosition = 'left'
 	"let g:Lf_PreviewInPopup = 1
@@ -191,3 +194,10 @@ call plug#end()
 	"P for preview, p for close
 	autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 	autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+
+"----------last cursor place configuration-----------------------------------
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
