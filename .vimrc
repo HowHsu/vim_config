@@ -52,7 +52,8 @@ call plug#begin('~/.vim/plugged')
 	" code fast alignment
 	Plug 'junegunn/vim-easy-align'
 	" Tab to Space automatically
-	Plug 'vim-scripts/Smart-Tabs'
+	" [Hao] disable this since tab problem
+"	Plug 'vim-scripts/Smart-Tabs'
 	
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -88,6 +89,7 @@ call plug#end()
 	set nu
 	set noshowmode
 
+	set tabstop=8
 	set backspace=2
 
 	" set the fold mode
@@ -100,6 +102,10 @@ call plug#end()
 
 	" show a candidate list when press ctrl+]
 	set cscopetag
+
+	if &diff
+		colorscheme github
+	endif
 
 	set colorcolumn=81
 	:hi ColorColumn ctermbg=darkgrey guibg=darkgrey
